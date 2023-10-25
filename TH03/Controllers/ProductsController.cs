@@ -16,9 +16,12 @@ namespace TH03.Controllers
         private EshopDB db = new EshopDB();
 
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(string name = null)
         {
             var products = db.Products.Include(p => p.Category);
+
+            if (!string.IsNullOrWhiteSpace(name)) products = db.Products.Include(p => p.Category).Where(item => item.name.Contains(name));
+
             return View(products.ToList());
         }
 

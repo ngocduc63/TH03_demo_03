@@ -6,9 +6,18 @@
 
 <h2>@ViewBag.Title</h2>
 
-<p>
+<p style="background-color: lightgray; color: white; width: 100px; text-align: center; padding: 8px 0; border-radius: 4px">
     @Html.ActionLink("Tạo mới", "Create")
 </p>
+
+@using (Html.BeginForm("Index", "Products", FormMethod.Get, new { enctype = "multipart/form-data" }))
+{
+    <p>
+        Nhập tên sản phẩm cần tìm: @Html.TextBox("name")
+        <input type="submit" value="Search" />
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>
@@ -35,35 +44,42 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.unitPrice)
-        </td>
-        <td>
-            <img src="~/Upload/@item.image" style="width: 100px; height:100px"/>
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.productDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.available)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.description)
-        </td>
-        <td>
-            @Html.ActionLink("Sửa", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Chi tiết", "Details", new { id=item.id }) |
-            @Html.ActionLink("Xóa", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.unitPrice)
+            </td>
+            <td>
+                <img src="~/Upload/@item.image" style="width: 100px; height:100px" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.available)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Chi tiết", "Details", new { id = item.id }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
 
 </table>
+<style>
+    .searchBtn:hover {
+        opacity: 0.6;
+    }
+</style>
+
