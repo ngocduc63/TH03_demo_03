@@ -1,0 +1,39 @@
+﻿@model TH03.Models.Category
+
+@{
+    ViewBag.Title = "Xóa loại sản phẩm";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Bạn có chắc chắn muốn xóa?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nameVN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nameVN)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
+            @Html.ActionLink("Quay lại", "Index")
+        </div>
+    }
+</div>

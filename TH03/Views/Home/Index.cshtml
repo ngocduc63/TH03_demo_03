@@ -1,0 +1,145 @@
+﻿@model IEnumerable<TH03.Models.Product>
+@{
+    ViewBag.Title = "Product";
+}
+<style>
+    .text {
+        font-size: xx-large;
+    }
+
+    .containerr {
+        margin-top: 50px;
+        display: flex;
+        width: 100%;
+        gap: 50px;
+        flex-wrap: wrap;
+    }
+
+    .itemm {
+        width: 300px;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+        background-color: white;
+        box-shadow: 0px 2px 2px #000;
+        position: relative;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+        .itemm:hover .buttonAdd {
+            display: block;
+        }
+
+    .quantitySale {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background-color: red;
+        padding: 16px 12px;
+        color: white;
+        border-radius: 50%;
+    }
+
+    .img {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        width: 100%;
+        height: 60%;
+        flex: 3
+    }
+
+    .buttonAdd {
+        display: none;
+        position: absolute;
+        bottom: 30%;
+        text-align: center;
+        padding: 10px 0;
+        width: 100%;
+        background-color: black;
+        color: white;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 20px
+    }
+
+    .price {
+        font-size: x-large;
+        color: red;
+    }
+
+    .priceSale {
+        font-size: x-large;
+        color: red;
+    }
+
+    .priceReal {
+        font-size: large;
+        color: gray;
+        text-decoration-line: line-through;
+    }
+
+    .priceContain {
+        display: flex;
+        align-items: center;
+        column-gap: 20px;
+    }
+
+    .description {
+        font-size: large;
+    }
+
+    .icon-heart {
+        font-size: 24px;
+        position: absolute;
+    }
+</style>
+
+
+<div class="containerr">
+    @{
+        var listProduct = Model.ToList();
+        foreach (var item in listProduct)
+        {
+            <div class="itemm">
+                @*@{
+                        if (item.QuantitySale > 0)
+                        {
+                            <div class="quantitySale">-@item.QuantitySale%</div>
+                        }
+                    }*@
+                <img src="~/Upload/@item.image" class="img" />
+                <div class="buttonAdd">Add To Card</div>
+                <div class="content">
+                    <div class="priceContain">
+                        @*@{
+                                if (item.QuantitySale > 0)
+                                {
+                                    var priceSale = $"${(int)item.Price * (100 - item.QuantitySale) / 100}.00";
+                                    <div class="priceSale">@priceSale</div>
+                                    <div class="priceReal">$@item.Price.00</div>
+                                }
+                                else
+                                {
+                                    <div class="price">$@item.Price.00</div>
+                                }
+                            }*@
+                        <div class="price">$@item.unitPrice.00</div>
+                    </div>
+                    <div class="description">@item.description</div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+
+
